@@ -1,7 +1,7 @@
 <?php
     
     $uname = $pass = "";
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['login'])) {
         $uname = test_input($_POST["uname"]);
         $pass = test_input($_POST["psw"]);
         $servername = "localhost";
@@ -20,13 +20,14 @@
             if (password_verify($pass, $row['Password'])) {
                 //session_register("uname");
                 //session_register("pass");
-                echo "Login Successful";
+                header("Location: account.php");
             } else {
                 echo "Login Failed";
             }
         } else {
             echo "Login Failed";
         }
+        mysqli_close($conn);
     }
 
     function test_input($data) {
@@ -36,3 +37,18 @@
         return $data;
     }
 ?>
+
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form action = "" method = "POST">
+            <label for="uname">Username</label>
+            <input type = "text" name = "uname" required />
+            <label for="psw">Password</label>
+            <input type = "password" name = "psw" required />
+            <button type = "submit" name="login">Login</button>
+        </form>
+    </body>
+</html>
