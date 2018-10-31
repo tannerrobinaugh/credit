@@ -1,6 +1,6 @@
 <?php
 
-    include 'db_connection.php';
+    require_once 'db_connection.php';
     $uname = $pass = $email = "";
     if (isset($_POST['create'])) {
         $uname = test_input($_POST["uname"]);

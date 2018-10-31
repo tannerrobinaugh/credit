@@ -1,6 +1,6 @@
 <?php
     
-    include 'db_connection.php';
+    require_once 'db_connection.php';
     $uname = $pass = "";
     if (isset($_POST['login'])) {
         $uname = test_input($_POST["uname"]);
