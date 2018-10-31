@@ -1,18 +1,11 @@
 <?php
     
+    include 'db_connection.php';
     $uname = $pass = "";
     if (isset($_POST['login'])) {
         $uname = test_input($_POST["uname"]);
         $pass = test_input($_POST["psw"]);
-        $servername = "localhost";
-        $username = "root";
-        $password = NULL;
-        $dbname = "users";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {
-            die("Connection failed: ". $conn->connect_error);
-        }
+        $conn = openDB();
         $sql = "SELECT * FROM account WHERE Username = '$uname'";
         $result = $conn->query($sql);
         if (mysqli_num_rows($result) == 1) {
@@ -27,7 +20,7 @@
         } else {
             echo "Login Failed";
         }
-        mysqli_close($conn);
+        closeDB($conn);
     }
 
     function test_input($data) {
